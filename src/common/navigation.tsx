@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { NavigationWrapper } from "./LayoutStyles";
 
 import { LinkButton } from "./LinkButton";
@@ -30,8 +30,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export const NavigationMenu = ({ hasAdminPermissions }) => {
+const NavigationMenu = () => {
   const classes = useStyles();
+  const hasAdminPermissions = useSelector((state) => state.auth.admin);
   return (
     <div className={classes.root}>
       <AppBar position="fixed" color="inherit" className={classes.appBar}>
@@ -49,10 +50,4 @@ export const NavigationMenu = ({ hasAdminPermissions }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    hasAdminPermissions: state.auth.admin,
-  };
-};
-
-export default connect(mapStateToProps, null)(NavigationMenu);
+export default NavigationMenu;

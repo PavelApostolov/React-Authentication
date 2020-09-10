@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "../common/layout";
+import Layout from "../common/Layout";
 
-const Account = (props) => {
+const Account = () => {
   return <Layout>Account Page</Layout>;
 };
 

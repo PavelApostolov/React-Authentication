@@ -1,13 +1,13 @@
 import React, { ReactNode } from "react";
 import PropTypes from "prop-types";
-import NavigationMenu from "./navigation";
+import NavigationMenu from "./Navigation";
 import { Wrapper } from "./LayoutStyles";
 
 interface Layout {
   children: ReactNode;
 }
 
-export const Layout = ({ children }: Layout) => {
+const Layout = ({ children }: Layout) => {
   return (
     <Wrapper>
       <NavigationMenu />

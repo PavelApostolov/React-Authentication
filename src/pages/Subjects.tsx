@@ -1,8 +1,13 @@
 import React from "react";
-import Layout from "../common/layout";
+import Layout from "../common/Layout";
+import SubjectsTable from "../common/SubjectsTable";
 
-const Subjects = (props) => {
-  return <Layout>Subjects Page</Layout>;
+const Subjects = () => {
+  return (
+    <Layout>
+      <SubjectsTable />
+    </Layout>
+  );
 };
 
 export default Subjects;

@@ -1,18 +1,26 @@
-import React, { Suspense } from "react";
-import { Route, Switch, withRouter, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import React from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Home from "./pages/Home";
 import Logout from "./pages/Logout";
 import Auth from "./pages/Auth";
 import Account from "./pages/Account";
 import Admin from "./pages/Admin";
+import Subjects from "./pages/Subjects";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import thunk from "redux-thunk";
+import authReducer from "./store/reducers/auth";
+import { BrowserRouter } from "react-router-dom";
 
-const Subjects = React.lazy(() => {
-  return import("./pages/Subjects");
-});
+// const Subjects = React.lazy(() => {
+//   return import("./pages/Subjects");
+// });
 
-const app = ({ isAuthenticated, hasAdminPermissions }) => {
+const App = () => {
+  const isAuthenticated = useSelector((state) => state.auth.token !== null);
+  const hasAdminPermissions = useSelector((state) => state.auth.admin);
   let routes = (
     <Switch>
       <Route path="/" exact component={Auth} />
@@ -33,18 +41,21 @@ const app = ({ isAuthenticated, hasAdminPermissions }) => {
     );
   }
 
-  return (
-    <div>
-      <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
-    </div>
-  );
+  return <div>{routes}</div>;
 };
 
-const mapStateToProps = (state) => {
-  return {
-    isAuthenticated: state.auth.token !== null,
-    hasAdminPermissions: state.auth.admin,
-  };
-};
+const rootReducer = combineReducers({
+  auth: authReducer,
+});
 
-export default withRouter(connect(mapStateToProps, null)(app));
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
+const RootApp = () => (
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
+);
+
+export default RootApp;

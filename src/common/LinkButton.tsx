@@ -10,7 +10,7 @@ export const LinkButton: FunctionComponent<LinkButtonProps> = ({
   link = "",
 }) => (
   <NavigationLinkContainer>
-    <NavigationMenuLink to={`${link}`} activeStyle={{ color: "#0033ff" }}>
+    <NavigationMenuLink to={`${link}`} exact activeStyle={{ color: "#0033ff" }}>
       {text}
     </NavigationMenuLink>
   </NavigationLinkContainer>

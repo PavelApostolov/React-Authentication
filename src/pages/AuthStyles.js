@@ -46,4 +46,10 @@ export const CustomInput = styled.input`
   outline: none;
   box-shadow: none;
   margin: 5px;
+  ${({ invalid }) =>
+    invalid &&
+    `
+  border: solid 1px red;
+  background-color: #fbe5e6;
+`}
 `;

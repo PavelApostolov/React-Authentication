@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "../common/layout";
+import Layout from "../common/Layout";
 
-const Home = (props) => {
+const Home = () => {
   return <Layout>Home Page</Layout>;
 };
 
